@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aouty.area.mapper.AreaMapper">
+    <!-- 查询所有的area -->
+    <select id="queryArea" resultType="com.aouty.area.entity.Area">
+        SELECT area_id,area_name,priority,create_time,last_edit_time
+        FROM area
+        ORDER BY priority
+        DESC
+    </select>
+    <!-- 根据id查询area -->
+    <select id="queryAreaById" resultType="com.aouty.area.entity.Area">
+        SELECT area_id,area_name,priority,create_time,last_edit_time
+        FROM area
+        WHERE
+        area_id=#{areaId}
+    </select>
+
+    <!-- 添加area -->
+    <insert id="insertArea" useGeneratedKeys="true" keyProperty="areaId" keyColumn="area_id"
+            parameterType="com.aouty.area.entity.Area">
+        INSERT INTO
+        area(area_name,priority,
+        create_time,last_edit_time)
+        VALUES
+        (#{areaName},#{priority},#{createTime},#{lastEditTime})
+    </insert>
+
+    <!-- 修改area -->
+    <update id="updateArea" parameterType="com.aouty.area.entity.Area">
+        UPDATE area
+        <set>
+            <if test="areaName!=null">area_name=#{areaName},</if>
+            <if test="priority!=null">priority=#{priority},</if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
+        </set>
+        WHERE area_id=#{areaId}
+    </update>
+    <!-- 根据id删除area -->
+    <delete id="deleteArea">
+        DELETE FROM area
+        WHERE area_id=#{areaId}
+    </delete>
+
+    <!-- 条件查询 -->
+    <select id="queryAreaListByCondition" parameterType="com.aouty.area.entity.Area"
+            resultType="com.aouty.area.entity.Area">
+        SELECT area_id,area_name,priority,create_time,last_edit_time
+        FROM area
+        <where>
+            <if test="areaName !=null">area_name like CONCAT('%',#{areaName},'%')</if>
+        </where>
+    </select>
+</mapper>

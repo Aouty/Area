@@ -1,0 +1,8 @@
+   _____
+  /  _  \_______   ____ _____
+ /  /_\  \_  __ \_/ __ \\__  \
+/    |    \  | \/\  ___/ / __ \_
+\____|__  /__|    \___  >____  /
+        \/            \/     \/
+${AnsiColor.BLUE}
+::: Project (version:${application.version}) :::  Spring-Boot ${spring-boot.version} Creator:Aouty
